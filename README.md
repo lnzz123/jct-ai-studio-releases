@@ -29,19 +29,29 @@ sha256sum -c jct-ai-studio-<版本>.tar.gz.sha256
 
 服务器要求：Linux x86_64（建议 Ubuntu 22.04 或 24.04）、Docker Engine 24 以上、内存 8 GB 起、`/srv` 下至少 30 GB 可用空间、一个 HTTPS 域名。
 
+**一键安装（推荐）**：在服务器上运行一条命令，脚本会自动下载最新的安装包、核对 SHA-256、解压并开始安装。
+
+```bash
+curl -fsSL https://www.97network.com/ai-studio/get.sh | sudo bash -s -- --url https://studio.example.com
+```
+
+把 `studio.example.com` 换成你的域名。要装指定版本，在末尾加 `--version 1.0.0`；服务器拉不了镜像时加 `--offline`；全部参数用 `--help` 查看。
+
+**手动安装**：自己下载安装包后执行：
+
 ```bash
 tar xzf jct-ai-studio-<版本>.tar.gz && cd jct-ai-studio-<版本>
 sudo ./install.sh --url https://studio.example.com
 ```
 
-把 `studio.example.com` 换成你的域名。安装完成后脚本会打印一条初始化链接，打开它创建第一个管理员并添加模型。完整步骤见[体验版与部署教程](https://www.97network.com/ai-studio/trial/)。
+安装完成后脚本会打印一条初始化链接，打开它创建第一个管理员并添加模型。完整步骤见[体验版与部署教程](https://www.97network.com/ai-studio/trial/)。
 
 ## 升级
 
 已经装好的系统有两种升级方式：
 
 - **在线升级**：管理后台的“系统设置 → 版本与授权”里点“检查更新”，有新版本时点“升级”。
-- **用安装包升级**：下载新版本，解压后执行 `sudo ./upgrade.sh`。
+- **用安装包升级**：再运行一次上面的一键安装命令（检测到已安装会自动升级），或者下载新版本，解压后执行 `sudo ./upgrade.sh`。
 
 两种方式都会先备份数据库和配置，升级失败自动回滚。
 
